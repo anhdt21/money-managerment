@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+
+<!--css-->
+  <link rel="stylesheet" href="./assets/css/reset.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+  <link rel="stylesheet" href="./assets/css/style.css">
+<!--JS-->
+    <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+    <script 
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+    crossorigin="anonymous">
+    </script>
+    <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+    crossorigin="anonymous">
+    </script>
+    <script 
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+    crossorigin="anonymous">
+    </script>
+
+    <!-- Libs -->
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="./assets/js/mustache.min.js"></script>
+
+    <script type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "url": "vuduccuong.ml",
+          "name": "Tính cmn tiền",
+          "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+84-343-338-2777",
+              "contactType": "Customer service"
+          }
+      }
+  </script>
+
+  <meta property="og:type" content="Tùng Mộc Cắc và những người bạn" />
+  <meta property="og:url" content="https://vuduccuong.ml/" />
+  <meta property="og:title" content="Tùng Mộc Cắc và những mẩu chuyện cười | Nghệ sỹ ưu tú Xuân Tùng" />
+  <meta property="og:description" content="Trang này lập ra chả có mục đích củ loz gì" />
+  <meta property="og:image" content="https://scontent.fhan2-4.fna.fbcdn.net/v/t1.0-9/70809100_2439299396394485_5956183293731799040_n.jpg?_nc_cat=105&_nc_ohc=Zus8rGDKDdkAQmyUgenWy7US555psSls3kwywnpuJw8yMfKfNE0764Gbg&_nc_ht=scontent.fhan2-4.fna&oh=1d19352c875728b09136614cf0829d3e&oe=5E6B55C5"
+  />
+  </head>
+  <body>
+
+    <section class="c-header">
+      <button class="btn btn-success" id="addRecord">Add New Record</button>
+      <form id="frmAddRecord" class="form-inline">
+        <div class="form-group mr-2">        
+          <div class='checkbox'>
+            Cường
+            <label class='checkbox__container'>
+              
+              <input class='checkbox__toggle' type='checkbox' id="cuong">
+              <span class='checkbox__checker anim'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </div>
+        <div class="form-group mr-2">        
+          <div class='checkbox'>
+            Đạt
+            <label class='checkbox__container'>
+              
+              <input class='checkbox__toggle' type='checkbox' id="dat">
+              <span class='checkbox__checker anim'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+      </div>
+      <div class="form-group mr-2">        
+        <div class='checkbox'>
+          Tùng
+          <label class='checkbox__container'>
+            
+            <input class='checkbox__toggle' type='checkbox' id="tung">
+            <span class='checkbox__checker anim'></span>
+            <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='path path--top' d='M194.27,59.599l42.438-42.028
+            c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+            c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+              <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+            c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+            c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+            </svg>
+            <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+            s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+            S164.58,99.087,199.493,99.087z'></path>
+            </svg>
+          </label>
+        </div>
+      </div>
+      <div class="form-group mr-2">        
+        <div class='checkbox'>
+          Tuấn Anh
+          <label class='checkbox__container'>
+            
+            <input class='checkbox__toggle' type='checkbox' id="ta">
+            <span class='checkbox__checker anim'></span>
+            <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='path path--top' d='M194.27,59.599l42.438-42.028
+            c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+            c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+              <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+            c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+            c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+            </svg>
+            <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+            s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+            S164.58,99.087,199.493,99.087z'></path>
+            </svg>
+          </label>
+        </div>
+      </div>
+      <div class="form-group mr-2">        
+        <div class='checkbox'>
+          Long
+          <label class='checkbox__container'>
+            
+            <input class='checkbox__toggle' type='checkbox' id="long">
+            <span class='checkbox__checker anim'></span>
+            <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='path path--top' d='M194.27,59.599l42.438-42.028
+            c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+            c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+              <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+            c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+            c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+            </svg>
+            <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+              <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+            s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+            S164.58,99.087,199.493,99.087z'></path>
+            </svg>
+          </label>
+        </div>
+      </div>
+      <div class="form-group mr-6">
+        Descriptions
+        <textarea class="form-control"
+        cols="20"
+        id="add-note"
+        >
+      </textarea>
+      </div>
+      <div class="form-group mr-6">
+        Tổng tiền
+        <input type="number" class="form-control" id="total-money">
+      </div>
+        <button type="submit" class="btn btn-primary" id="addRC">Thêm mới</button>
+    </form>
+    </section>
+    
+    <section class="c-main">
+      <div class="container-fluid">
+        <div class="row">
+         <div class="col-md-12">
+           <div class="card">
+             <div class="card-header">
+               Lịch sử 
+               <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Chọn tháng
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="1">Tháng 1</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="2">Tháng 2</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="3">Tháng 3</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="4">Tháng 4</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="5">Tháng 5</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="6">Tháng 6</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="7">Tháng 7</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="8">Tháng 8</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="9">Tháng 9</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="10">Tháng 10</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="11">Tháng 11</a>
+                  <a class="dropdown-item" style="cursor: pointer;" data-id="12">Tháng 12</a>
+                
+                </div>
+              </div>
+             </div>
+             <table class="table">
+              <thead>
+                  <tr>
+                      <th>Ngày</th>
+                      <th>Cường</th>
+                      <th>Đạt</th>
+                      <th>Tùng</th>
+                      <th>Tuấn Anh</th>
+                      <th>Long</th>
+                      <th>Tổng tiền</th>
+                  </tr>
+              </thead>
+              <tbody id="table-data">
+                      
+              </tbody>
+          </table>
+           </div>
+         </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="c-footer">
+
+    </section>
+    
+      <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+      <script src="./assets/js/Utils.CVD.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDbUHSLCogYBFt-J8rY5bKW-JLwGD1Y7e4",
+          authDomain: "money-managerment.firebaseapp.com",
+          databaseURL: "https://money-managerment.firebaseio.com",
+          projectId: "money-managerment",
+          storageBucket: "bucket.appspot.com",
+          messagingSenderId: "1037575957516"
+        };
+        firebase.initializeApp(config);
+      </script>
+    <script src="./assets/js/function.js"></script>
+    <script src="./assets/addRecord.js"></script>
+
+
+    <!-- Mustache Template -->
+    <script id="table-template" type="x-tmpl-mustache">
+      <tr>
+        <td>{{Date}}</td>
+        <td>
+          <div class='checkbox'>
+            <label class='checkbox__container'>
+              <input class='checkbox__toggle' type='checkbox' {{CuongCheck}} disabled>
+              <span class='checkbox__checker anim {{Cuong}}'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class='checkbox'>
+            <label class='checkbox__container'>
+              <input class='checkbox__toggle' type='checkbox' {{DatCheck}} disabled>
+              <span class='checkbox__checker anim {{Dat}}'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class='checkbox'>
+            <label class='checkbox__container'>
+              <input class='checkbox__toggle' type='checkbox' {{TungCheck}} disabled>
+              <span class='checkbox__checker anim {{Tung}}'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class='checkbox'>
+            <label class='checkbox__container'>
+              <input class='checkbox__toggle' type='checkbox' {{TACheck}} disabled>
+              <span class='checkbox__checker anim {{TA}}'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class='checkbox'>
+            <label class='checkbox__container'>
+              <input class='checkbox__toggle' type='checkbox' {{LongCheck}} disabled>
+              <span class='checkbox__checker anim {{Long}}'></span>
+              <svg class='checkbox__path' id='checkbox__path' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='path path--top' d='M194.27,59.599l42.438-42.028
+              c-9.086-10.419-22.443-17.006-37.215-17.006c-35.529,0-46.643,27.712-75.047,27.712s-38-27.712-75.072-27.712
+              c-13.45,0-25.621,5.355-34.514,14.045l48.098,48.113'></path>
+                <path class='path path--bottom' d='M183.561,48.822l42.521,42.794
+              c-7.649,4.874-16.759,7.697-26.589,7.697c-34.914,0-46.643-30.202-75.06-30.202s-35.527,30.202-75.06,30.202
+              c-13.431,0-25.502-5.255-34.346-13.8l47.93-48.18'></path>
+              </svg>
+              <svg class='checkbox__bg' id='checkbox__bg' space='preserve' version='1.1' viewbox='0 0 248.868 99.876'>
+                <path class='shape-bg' d='M199.493,99.087c27.504,0,49.374-22.106,49.374-49.374S226.552,0.338,199.493,0.338c-35.529,0-46.643,27.712-75.047,27.712
+              s-38-27.712-75.072-27.712C22.048,0.338,0,22.444,0,49.713s21.826,49.374,49.374,49.374c39.533,0,46.643-30.202,75.06-30.202
+              S164.58,99.087,199.493,99.087z'></path>
+              </svg>
+            </label>
+          </div>
+        </td>
+        <td>{{TotalMoney}}đ</td>
+      </tr>
+  </script>
+  </body>
+</html>
