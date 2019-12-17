@@ -14,7 +14,7 @@ let Utils = (function(){
     };
 
     const addRecord = (obj) => {
-        const date = new Date();
+        const date = new Date(obj.strdate);
         const month = date.getMonth() + 1;
         firebase.database().ref(`Thang${month}/${getCurrentDate()}`).set({
             date: getCurrentDate(),
@@ -34,11 +34,38 @@ let Utils = (function(){
         return strPrice.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
     };
 
+    const getDateTime =() =>{
+        var now     = new Date(); 
+        var year    = now.getFullYear();
+        var month   = now.getMonth()+1; 
+        var day     = now.getDate();
+        var hour    = now.getHours();
+        var minute  = now.getMinutes();
+        var second  = now.getSeconds(); 
+        if(month.toString().length == 1) {
+             month = '0'+month;
+        }
+        if(day.toString().length == 1) {
+             day = '0'+day;
+        }   
+        if(hour.toString().length == 1) {
+             hour = '0'+hour;
+        }
+        if(minute.toString().length == 1) {
+             minute = '0'+minute;
+        }
+        if(second.toString().length == 1) {
+             second = '0'+second;
+        }   
+        var dateTime = day+'/'+month+'/'+year+' '+hour+':'+minute+':'+second;   
+         return dateTime;
+    }
 
     return{
         objectToArray: objectToArray,
         getCurrentDate: getCurrentDate,
         addRecord: addRecord,
-        formatPrie: formatPrie
+        formatPrie: formatPrie,
+        getDateTime: getDateTime
     };
 }());

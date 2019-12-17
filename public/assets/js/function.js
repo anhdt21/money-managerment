@@ -55,7 +55,21 @@ let homeController = {
                     const template = $('#table-template').html();
                     let render = "";
                     if (dataArr.length > 0) {
+                        let totalCuong = 0;
+                        let totalDat = 0;
+                        let totalTung = 0;
+                        let totalTA = 0;
+                        let totalLong = 0;
+
                         $.each(dataArr, function (i, item) {
+                            const arrTrue = Object.values(item);
+                            var avg = arrTrue.filter(item=>item === true).length;
+                            totalCuong = item.cuong === true ? totalCuong+ (item.totalmoney/avg) : totalCuong;
+                            totalDat = item.dat === true ? totalDat+ (item.totalmoney/avg) : totalDat;
+                            totalTung = item.tung === true ? totalTung+ (item.totalmoney/avg) : totalTung;
+                            totalTA = item.ta === true ? totalTA+ (item.totalmoney/avg) : totalTA;
+                            totalLong = item.long === true ? totalLong+ (item.totalmoney/avg) : totalLong;
+
                             render += Mustache.render(template, {
                                 Date : item.date,
                                 Cuong: item.cuong === true ? ' anim--speed anim--go-right' : '',
@@ -68,10 +82,20 @@ let homeController = {
                                 TACheck: item.ta === true ? 'checked' : null,
                                 Long: item.long === true ? ' anim--speed anim--go-right' : '',
                                 LongCheck: item.long === true ? 'checked' : null,
-                                TotalMoney: Utils.formatPrie(item.totalmoney)
+                                TotalMoney: Utils.formatPrie(item.totalmoney),
+                            
                             });
                         });
 
+                        render += `<tr style="color: red;">
+                        <td>Phải trả :</td>
+                        <td>${Utils.formatPrie(totalCuong)}đ</td>
+                        <td>${Utils.formatPrie(totalDat)}đ</td>
+                        <td>${Utils.formatPrie(totalTung)}đ</td>
+                        <td>${Utils.formatPrie(totalTA)}đ</td>
+                        <td>${Utils.formatPrie(totalLong)}đ</td>
+                        <td>${Utils.formatPrie(totalCuong + totalDat + totalTung + totalTA + totalLong)}đ</td>
+                        </tr>`;
                         if (render !== undefined) {
                             $('#table-data').html(render);
                             addEventClick();
@@ -89,14 +113,15 @@ let homeController = {
         //Add record
         $('#addRecord').off('click').on('click', function(e){
             e.preventDefault();
+            $('#add-note').val('');
             $('#frmAddRecord').show();
         });
 
 //Insert to db
         $('#addRC').off('click').on('click', function(e){
           e.preventDefault();
+          const strDate = $('#date-buy').val();
           const cuong = $('#cuong').attr('checked') === 'checked' ? true : false;
-
           const dat = $('#dat').attr('checked') === 'checked' ? true : false;
           const tung = $('#tung').attr('checked') === 'checked' ? true : false;
           const ta = $('#ta').attr('checked') === 'checked' ? true : false;
@@ -104,6 +129,7 @@ let homeController = {
           const note = $('#add-note').val();
           const totalMoney = $('#total-money').val();
           const obj = {
+            strdate: strDate,
             cuong: cuong,
             dat:dat,
             tung:tung,
@@ -128,7 +154,19 @@ let homeController = {
               const template = $('#table-template').html();
               let render = "";
               if (dataArr.length > 0) {
+                let totalCuong = 0;
+                let totalDat = 0;
+                let totalTung = 0;
+                let totalTA = 0;
+                let totalLong = 0;
                   $.each(dataArr, function (i, item) {
+                      const arrTrue = Object.values(item);
+                    var avg = arrTrue.filter(item=>item === true).length;
+                    totalCuong = item.cuong === true ? totalCuong+ (item.totalmoney/avg) : totalCuong;
+                    totalDat = item.dat === true ? totalDat+ (item.totalmoney/avg) : totalDat;
+                    totalTung = item.tung === true ? totalTung+ (item.totalmoney/avg) : totalTung;
+                    totalTA = item.ta === true ? totalTA+ (item.totalmoney/avg) : totalTA;
+                    totalLong = item.long === true ? totalLong+ (item.totalmoney/avg) : totalLong;
                       render += Mustache.render(template, {
                           Date : item.date,
                           Cuong: item.cuong === true ? ' anim--speed anim--go-right' : '',
@@ -145,6 +183,16 @@ let homeController = {
                       });
                   });
 
+                  render += `<tr style="color: red;">
+                  <td>Phải trả :</td>
+                  <td>${Utils.formatPrie(totalCuong)}đ</td>
+                  <td>${Utils.formatPrie(totalDat)}đ</td>
+                  <td>${Utils.formatPrie(totalTung)}đ</td>
+                  <td>${Utils.formatPrie(totalTA)}đ</td>
+                  <td>${Utils.formatPrie(totalLong)}đ</td>
+                  <td>${Utils.formatPrie(totalCuong + totalDat + totalTung + totalTA + totalLong)}đ</td>
+                  </tr>`;
+
                   if (render !== undefined) {
                       $('#table-data').html(render);
                       addEventClick();
@@ -155,15 +203,32 @@ let homeController = {
               }
           }
         });
+
+        //Phân người nấu cơm
+        setInterval(function(){
+            currentTime = Utils.getDateTime();
+            $('#who-is-cook').text(currentTime);
+        }, 1000);
+
+        //Đóng form
+        $('#close-modal').off('click').on('click',function(e){
+            e.preventDefault();
+            $('#frmAddRecord').hide();
+        });
+        //date picker
+        $('[data-toggle="datepicker"]').datepicker({
+            autoPick:true,
+            format:"yyyy-mm-dd"
+        });
     },
     clearForm : function(){
-      $('#cuong').removeAttr('checked');
-      $('#dat').removeAttr('checked');
-      $('#tung').removeAttr('checked');
-      $('#ta').removeAttr('checked');
-      $('#long').removeAttr('checked');
-      $('#add-note').val('');
-      $('#total-money').val(0);
+    //   $('#cuong').removeAttr('checked');
+    //   $('#dat').removeAttr('checked');
+    //   $('#tung').removeAttr('checked');
+    //   $('#ta').removeAttr('checked');
+    //   $('#long').removeAttr('checked');
+    //   $('#add-note').val('');
+    //   $('#total-money').val(0);
     }
 };
 
